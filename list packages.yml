@@ -1,0 +1,7 @@
+- name: yum_command 
+  yum:
+    list=installed
+  register: yum_packages
+
+- debug:
+    var: yum_packages
