@@ -1,4 +1,4 @@
-- name: Install wget
+- name: List_Packages
   hosts: all
   tasks:
     - name: yum_command 
