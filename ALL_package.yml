@@ -7,4 +7,4 @@
       register: yum_packages
 
     - debug:
-        var: yum_packages.name
+        var: yum_packages
