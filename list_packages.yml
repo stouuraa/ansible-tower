@@ -1,7 +1,6 @@
-- name: yum_command 
-  yum:
-    list=installed
-  register: yum_packages
-
-- debug:
-    var: yum_packages
+- name: Hello World Sample
+  hosts: all
+  tasks:
+    - name: Hello Message
+      debug:
+        msg: "Hello World!"
