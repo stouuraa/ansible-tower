@@ -1,7 +1,10 @@
-- name: Hello World Sample
+- name: Install IIS
   hosts: all
   tasks:
-    - name: Install IIS (Web-Server only)
-      win_feature:
-        name: Web-Server
-        state: present
+  - name: install-iis
+    win_feature:
+      name: "Web-Server"
+      state: present
+      restart: yes
+      include_sub_features: yes
+      include_management_tools: no
