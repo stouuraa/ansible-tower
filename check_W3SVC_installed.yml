@@ -2,6 +2,6 @@
   hosts: all
   tasks:
     - name: Check if a W3SVC is installed
-    win_service:
-      name: W3SVC
-    register: service_info
+      win_service:
+        name: W3SVC
+      register: service_info
