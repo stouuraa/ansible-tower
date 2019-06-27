@@ -1,7 +1,7 @@
 - name: Check if a iis installed
   hosts: all
   tasks:
-  - name: Ensure IIS webserver is installed
-    win_feature:
-    name: Web-Server
-    state: present
+    - name: Ensure IIS webserver is installed
+      win_feature:
+      name: Web-Server
+      state: present
