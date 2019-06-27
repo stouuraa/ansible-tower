@@ -1,0 +1,15 @@
+- name: install updates
+- hosts: all
+  tasks:
+   - name: install all critical and security updates
+     win_updates:
+       category_names:
+       - CriticalUpdates
+       - SecurityUpdates
+       state: installed
+     register: update_result
+
+   - name: reboot if required
+     win_reboot:
+       reboot_timeout_sec: 180
+     when: update_result.reboot_required
