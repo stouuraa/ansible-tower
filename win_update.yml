@@ -5,4 +5,11 @@
     - name: Running Windows Update
       win_updates:
         category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates']
-        reboot: yes
+      register: result
+
+    # output results
+    - debug: var=result
+    
+    # reboot only if required
+    - win_reboot:
+      when: result.reboot_required
