@@ -1,5 +1,5 @@
-- name: install updates
-- hosts: all
+- name: Install updates
+  hosts: all
   tasks:
    - name: install all critical and security updates
      win_updates:
