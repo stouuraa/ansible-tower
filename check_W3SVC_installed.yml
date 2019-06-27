@@ -3,5 +3,5 @@
   tasks:
     - name: Check if a W3SVC is installed
       win_service:
-        name: W3SVC
+        name: MSSQLServer
       register: service_info
