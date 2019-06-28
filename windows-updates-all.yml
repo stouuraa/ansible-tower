@@ -12,20 +12,12 @@
     #Install missing updates only if at least one is missing
    - name: Install missing updates.
      win_updates:
-       category_names:
-         – Application
-         – Connectors
-         – DefinitionUpdates
-         – DeveloperKits
-         – FeaturePacks
-         – Guidance
-         – ServicePacks
-         – Tools
-         – UpdateRollups
-         – CriticalUpdates
-         – SecurityUpdates
-     register: update_result
+        category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates']
+      register: result
+
+    # output results
+    - debug: var=result
    - name: Reboot, if needed.
      win_reboot:
-     when: update_result.reboot_required
+     when: result.reboot_required
   when: update_count.found_update_count|int >= 1
