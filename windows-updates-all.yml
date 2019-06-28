@@ -12,8 +12,8 @@
     #Install missing updates only if at least one is missing
    - name: Install missing updates.
      win_updates:
-        category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates']
-      register: result
+       category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates']
+     register: result
 
     # output results
     - debug: var=result
