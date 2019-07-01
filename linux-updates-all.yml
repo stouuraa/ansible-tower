@@ -1,1 +1,24 @@
 
+- name: List_Packages
+  hosts: all
+  tasks:
+    - name: yum_command 
+      yum:
+        list=installed
+      register: yum_packages
+
+    - debug:
+        var: yum_package
+        
+        # This task updates servers that use 'yum' and RPM packages
+        
+    - name: .rpm upgrade server
+      yum: >
+        update_cache=yes
+        name=*
+        state=latest
+        update_cache=yes
+      when: >
+        ansible_distribution == 'CentOS'
+        or
+        ansible_distribution == 'RedHat'
