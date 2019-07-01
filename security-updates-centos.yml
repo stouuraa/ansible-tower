@@ -1,0 +1,13 @@
+- name: Install Security updates
+  hosts: all
+  tasks:
+  - name: Ensure lsb_release package is loaded
+    yum: name=redhat-lsb-core state=present
+  - name: Reread ansible_lsb facts
+    setup: filter=ansible_lsb*
+  - name: install yum security updates on RHEL 6.X
+    when: ansible_facts['os_family'] == "RedHat" and ansible_facts['lsb']['major_release']|int >=7
+    yum: 
+        name: '*'
+        security: yes
+        state: latest
