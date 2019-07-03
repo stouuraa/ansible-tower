@@ -7,6 +7,9 @@
       register: yum_packages
 
     - debug: var=item
-      with_items: "{{yum_packages|json_query(jsonquery)}}"
+      with_items: 
+         - "{{yum_packages|json_query(jsonquery)}}"
+         - "{{yum_packages|json_query(jsonquery2)}}"
       vars:
         jsonquery: "results[?name=='GeoIP']"
+        jsonquery2: "results[?name=='GeoIP']"
