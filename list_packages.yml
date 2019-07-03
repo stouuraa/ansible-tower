@@ -10,6 +10,7 @@
       with_items: "{{yum_packages|json_query(jsonquery)}}"
       vars:
         jsonquery: "results[?name=='GeoIP']"
+    - debug: var=item
       with_items: "{{yum_packages|json_query(jsonquery2)}}"
       vars:
         jsonquery2: "results[?name=='wget']"
