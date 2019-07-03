@@ -11,5 +11,5 @@
          - "{{yum_packages|json_query(jsonquery)}}"
          - "{{yum_packages|json_query(jsonquery2)}}"
       vars:
-        jsonquery: "results[?name=='GeoIP']"
+        jsonquery: "results[?name=='wget']"
         jsonquery2: "results[?name=='GeoIP']"
