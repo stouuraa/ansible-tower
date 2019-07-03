@@ -9,4 +9,5 @@
     - debug: var=item
       with_items: "{{yum_packages|json_query(jsonquery)}}"
       vars:
-        jsonquery: "results[?name=='httpd',?name=='httpd']"
+        jsonquery: "results[?name=='httpd']"
+        jsonquery: "results[?name=='wget']"
