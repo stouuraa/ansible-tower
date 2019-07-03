@@ -10,4 +10,4 @@
       with_items: "{{yum_packages|json_query(jsonquery)}}"
       vars:
         jsonquery: "results[?name=='wget']"
-        jsonquery: "results[?name=='httpd']"
+      - jsonquery: "results[?name=='httpd']"
