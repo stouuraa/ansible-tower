@@ -2,13 +2,13 @@
   hosts: all
   tasks:
     - name: Check glibc version for RedHat based servers
-    shell: rpm -qa glibc
-    register: version_rpm
-    when: ansible_os_family == "RedHat"
-  - name: Create base file
-    local_action: shell echo 'hostname;server_ip;glibc version' | tee glibc_version.csv
-    become: no
-  - name: Write output to file
-    local_action: shell echo '{{ host_name.stdout }};{{ inventory_hostname }};{{ version_rpm.stdout }}' | tee -a glibc_version.csv
-    become: no
-    when: ansible_os_family == "RedHat"
+      shell: rpm -qa glibc
+      register: version_rpm
+      when: ansible_os_family == "RedHat"
+    - name: Create base file
+      local_action: shell echo 'hostname;server_ip;glibc version' | tee glibc_version.csv
+      become: no
+    - name: Write output to file
+      local_action: shell echo '{{ host_name.stdout }};{{ inventory_hostname }};{{ version_rpm.stdout }}' | tee -a glibc_version.csv
+      become: no
+      when: ansible_os_family == "RedHat"
