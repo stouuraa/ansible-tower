@@ -1,6 +1,9 @@
 - name: List_Packages
   hosts: all
   tasks:
+    - name: Get hostname
+      shell: hostname
+      register: host_name
     - name: Check glibc version for RedHat based servers
       shell: rpm -qa glibc
       register: version_rpm
