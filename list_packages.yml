@@ -12,4 +12,4 @@
          - "{{yum_packages|json_query(jsonquery2)}}"
       vars:
         jsonquery: "results[?name=='kernel']"
-        jsonquery2: "results[?name=='GeoIP']"
+        jsonquery2: "results[?name=='glibc']"
