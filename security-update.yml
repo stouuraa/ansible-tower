@@ -21,15 +21,15 @@
           name: yum-utils
       - name: check if reboot is required
         shell: needs-restarting -r
-        failed_when: false
+        failed_when: true
         register: reboot_required
-        changed_when: false
+        changed_when: true
   - when: updates.stdout_lines | length != 0 and reboot_required.rc != 2
     block:
       - name: reboot the server if required
         shell: sleep 3; reboot
         ignore_errors: true
-        changed_when: false
+        changed_when: true
         async: 1
         poll: 0
       - name: wait for server to come back after reboot
