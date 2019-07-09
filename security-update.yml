@@ -24,7 +24,7 @@
         failed_when: false
         register: reboot_required
         changed_when: false
-  - when: updates.stdout_lines | length < 0 and reboot_required.rc != 0
+  - when: updates.stdout_lines | length = 0 and reboot_required.rc != 0
     block:
       - name: reboot the server if required
         shell: sleep 3; reboot
