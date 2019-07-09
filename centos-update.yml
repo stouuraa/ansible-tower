@@ -1,6 +1,5 @@
 - name: Centos update / Reboot
   hosts: all
-  remote_user: lesechos-admin
   become: true
   become_method: sudo
   become_user: root
