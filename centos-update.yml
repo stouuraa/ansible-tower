@@ -1,7 +1,7 @@
 - name: List_Packages
   hosts: all
   tasks:
-    - name: : Perform yum update of all packages
+    - name: Perform yum update of all packages
       yum:
         name: '*'
         state: latest
