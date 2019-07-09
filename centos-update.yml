@@ -1,5 +1,7 @@
-- name: List_Packages
+- name: Centos update
   hosts: all
+  become_method: sudo
+  become_user: root
   tasks:
     - name: Perform yum update of all packages
       yum:
