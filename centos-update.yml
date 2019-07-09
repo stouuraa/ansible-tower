@@ -9,7 +9,7 @@
       poll: 0
       register: yum_sleeper
     - name: Check on async task of yum update
-       async_status:
+      async_status:
         jid: "{{ yum_sleeper.ansible_job_id }}"
       register: job_result
       until: job_result.finished
