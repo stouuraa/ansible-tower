@@ -1,6 +1,8 @@
 - name: Centos update
   hosts: all
   become: yes
+  become_user: root
+  become_method: su
   tasks:
     - name: Perform yum update of all packages
       yum:
