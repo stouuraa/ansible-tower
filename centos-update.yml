@@ -1,8 +1,9 @@
-- name: Centos update
+- name: Centos update / Reboot
   hosts: all
-  become: yes
+  remote_user: lesechos-admin
+  become: true
+  become_method: sudo
   become_user: root
-  become_method: su
   tasks:
     - name: Perform yum update of all packages
       yum:
