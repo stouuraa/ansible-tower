@@ -32,3 +32,12 @@
     - debug:
         msg: "Server {{ ansible_hostname }} was rebooted {{ result }}"
       when: result is defined
+    - name: Send a success email
+      mail:
+        host: mailhost.centorial.local
+        port: 25 
+        from: abouchelliga@lesechosleparisien.fr
+        to: abouchelliga@lesechosleparisien.fr
+        subject: Installation Update finished
+        body: 'The installation is Finished. 
+               Server {{ ansible_hostname }} was rebooted {{ result }}'
