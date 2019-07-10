@@ -8,7 +8,7 @@
         from: abouchelliga@lesechosleparisien.fr
         to: abouchelliga@lesechosleparisien.fr
         subject: Installation Update start
-        body: 'The installation is Starting.'
+        body: 'The installation is Starting on ** {{ ansible_hostname }} **Server.'
     - name: Perform yum update of all packages
       yum:
         name: '*'
