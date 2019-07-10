@@ -2,7 +2,16 @@
   hosts: all
   gather_facts: false
   tasks:
- 
+    #Send mail notification
+    - name: Send a success email
+      mail:
+        host: mailhost.centorial.local
+        port: 25 
+        from: abouchelliga@lesechosleparisien.fr
+        to: abouchelliga@lesechosleparisien.fr
+        subject: Installation Update start
+        body: 'The installation is Starting on ** {{ ansible_hostname }} **Server.'
+        
    # Check if there are missing updates
     - name: Check for missing updates.
       win_updates: state=installed
@@ -20,3 +29,12 @@
     - name: Reboot, if needed.
       win_reboot:
       when: result.reboot_required
+    #Send mail notification  
+    - name: Send a success email
+      mail:
+        host: mailhost.centorial.local
+        port: 25 
+        from: abouchelliga@lesechosleparisien.fr
+        to: abouchelliga@lesechosleparisien.fr
+        subject: Installation Update Finsih
+        body: 'The installation is Finished on ** {{ ansible_hostname }} **Server.'
