@@ -1,6 +1,14 @@
 - name: Centos update / Reboot
   hosts: all
   tasks:
+    - name: Send a success email
+      mail:
+        host: mailhost.centorial.local
+        port: 25 
+        from: abouchelliga@lesechosleparisien.fr
+        to: abouchelliga@lesechosleparisien.fr
+        subject: Installation Update start
+        body: 'The installation is Starting.'
     - name: Perform yum update of all packages
       yum:
         name: '*'
