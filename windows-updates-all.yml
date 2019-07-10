@@ -10,7 +10,7 @@
         from: abouchelliga@lesechosleparisien.fr
         to: abouchelliga@lesechosleparisien.fr
         subject: Installation Update start
-        body: 'The installation is Starting on ** {{ ansible_hostname }} **Server.'
+        body: 'The installation is Starting on ****Server.'
         
    # Check if there are missing updates
     - name: Check for missing updates.
