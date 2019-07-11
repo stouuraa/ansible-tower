@@ -2,7 +2,7 @@
   hosts: all
   tasks:
   
-   - name: Search-only, return list of found updates (if any), log to c:\ansible_wu.txt
+   - name: Search-only, return list of found updates 
      win_updates:
        category_names: SecurityUpdates
        state: searched
@@ -17,6 +17,13 @@
        state: installed
      register: update_result
 
+   - name: Install only particular updates based on the KB numbers (KB4495586)
+     win_updates:
+       category_name:
+       - SecurityUpdates
+       whitelist:
+       - KB4495586
+       
    - name: reboot if required
      win_reboot:
        reboot_timeout_sec: 3600
