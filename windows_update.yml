@@ -1,6 +1,15 @@
 - name: Install updates
   hosts: all
   tasks:
+  
+   - name: Search-only, return list of found updates (if any), log to c:\ansible_wu.txt
+     win_updates:
+       category_names: SecurityUpdates
+       state: searched
+       register: result
+    - debug:
+        var: result
+       
    - name: install all critical and security updates
      win_updates:
        category_names:
