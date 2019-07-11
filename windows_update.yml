@@ -9,15 +9,15 @@
        register: result
    
        
-   - name: install all critical and security updates
-     win_updates:
-       category_names:
-       - CriticalUpdates
-       - SecurityUpdates
-       state: installed
-     register: update_result
+   #- name: install all critical and security updates
+    # win_updates:
+     #  category_names:
+      # - CriticalUpdates
+       #- SecurityUpdates
+       #state: installed
+     #register: update_result
 
-   - name: Install only particular updates based on the KB numbers (KB4495586)
+   - name: Install only particular updates based on the KB numbers (KB4048953)
      win_updates:
        category_name:
        - SecurityUpdates
