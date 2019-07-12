@@ -29,18 +29,20 @@
       ignore_errors: true
       register: reboot_hint
 
-    - name: Rebooting ...
-      command: shutdown -r now "Reboot required for updated kernel"
-      async: 0
-      poll: 0
-      become: false
-      ignore_errors: true
-      when: reboot_hint.stdout.find("reboot") != -1
-      register: rebooting
-
-    - name: Wait for rebooted servers to come back
-      local_action: wait_for host={{ ansible_ssh_host | default(inventory_hostname) }} state=started port=22 delay=30 timeout=300 connect_timeout=15
-      when: rebooting|changed
+    - name: reboot the server if required
+        shell: sleep 3; reboot
+        ignore_errors: true
+        changed_when: false
+        async: 1
+        poll: 0
+      - name: wait for server to come back after reboot
+        wait_for_connection:
+          timeout: 600
+          delay: 20
+        register: reboot_result
+      - name: reboot time
+        debug:
+          msg: "The system rebooted in {{ reboot_result.elapsed }} seconds."
     - name: Send a success email
       mail:
         host: mailhost.centorial.local
