@@ -48,5 +48,5 @@
         from: abouchelliga@lesechosleparisien.fr
         to: abouchelliga@lesechosleparisien.fr
         subject: Installation Update finished
-        body: 'The installation is Finished. 
-               Server {{ ansible_hostname }} was rebooted'\n' --- {{ job_result }}---'
+        body: 'The installation is Finished.
+               Server {{ ansible_hostname }} was rebooted --- {{ job_result }}---'
