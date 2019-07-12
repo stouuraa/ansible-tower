@@ -24,14 +24,23 @@
       retries: 5000
     - debug:
         msg: "Yum update of server {{ ansible_hostname }} has been completed."
-    - name: Reboot server
-      reboot:
-        msg: Server is being rebooted
-      ignore_errors: yes
-      register: result
-    - debug:
-        msg: "Server {{ ansible_hostname }} was rebooted {{ result }}"
-      when: result is defined
+    - name: Check for reboot
+      shell: if [ $(rpm -q kernel|tail -n 1) != kernel-$(uname -r) ]; then echo 'reboot'; else echo 'no'; fi
+      ignore_errors: true
+      register: reboot_hint
+
+    - name: Rebooting ...
+      command: shutdown -r now "Reboot required for updated kernel"
+      async: 0
+      poll: 0
+      become: false
+      ignore_errors: true
+      when: reboot_hint.stdout.find("reboot") != -1
+      register: rebooting
+
+    - name: Wait for rebooted servers to come back
+      local_action: wait_for host={{ ansible_ssh_host | default(inventory_hostname) }} state=started port=22 delay=30 timeout=300 connect_timeout=15
+      when: rebooting|changed
     - name: Send a success email
       mail:
         host: mailhost.centorial.local
@@ -40,4 +49,4 @@
         to: abouchelliga@lesechosleparisien.fr
         subject: Installation Update finished
         body: 'The installation is Finished. 
-               Server {{ ansible_hostname }} was rebooted {{ result }}  {{ job_result }}'
+               Server {{ ansible_hostname }} was rebooted'\n' --- {{ job_result }}---'
