@@ -1,6 +1,14 @@
 - name: Install Security updates
   hosts: all
   tasks:
+  - name: Send a success email
+      mail:
+        host: mailhost.centorial.local
+        port: 25 
+        from: abouchelliga@lesechosleparisien.fr
+        to: abouchelliga@lesechosleparisien.fr
+        subject: Installation Update start
+        body: 'The installation is Starting on ** {{ ansible_hostname }} **Server.'
   - name: check packages for updates
     shell: yum list updates | awk 'f;/Updated Packages/{f=1;}' | awk '{ print $1 }'
     changed_when: updates.stdout_lines | length > 0
@@ -40,3 +48,12 @@
       - name: reboot time
         debug:
           msg: "The system rebooted in {{ reboot_result.elapsed }} seconds."
+      - name: Send a success email
+        mail:
+          host: mailhost.centorial.local
+          port: 25 
+          from: abouchelliga@lesechosleparisien.fr
+          to: abouchelliga@lesechosleparisien.fr
+          subject: Installation Update finished
+          body: 'The installation is Finished.
+                 Server {{ ansible_hostname }} was rebooted '    
