@@ -1,5 +1,8 @@
-- name: Ensure the httpd service is running
-  service:
-    name: httpd
-    state: started
-  become: yes
+- name: Install Security updates
+  hosts: all
+  tasks:
+  - name: Ensure the httpd service is running
+    service:
+      name: httpd
+      state: started
+    become: yes
