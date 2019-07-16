@@ -1,8 +1,25 @@
-- name: Install Security updates
+- name: Install nginx
   hosts: all
   tasks:
-  - name: Ensure the httpd service is running
+  become: true
+
+  tasks:
+  - name: Add epel-release repo
+    yum:
+      name: epel-release
+      state: present
+
+  - name: Install nginx
+    yum:
+      name: nginx
+      state: present
+
+  - name: Insert Index Page
+    template:
+      src: index.html
+      dest: /usr/share/nginx/html/index.html
+
+  - name: Start NGiNX
     service:
-      name: httpd
+      name: nginx
       state: started
-    become: yes
