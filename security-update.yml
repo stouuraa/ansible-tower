@@ -1,5 +1,6 @@
 - name: Install Security updates
   hosts: all
+  become: true
   tasks:
   - name: Send a success email
     mail:
