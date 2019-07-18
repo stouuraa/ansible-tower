@@ -49,12 +49,12 @@
       - name: reboot time
         debug:
           msg: "The system rebooted in {{ reboot_result.elapsed }} seconds."
-      - name: Send a success email
-        mail:
-          host: mailhost.centorial.local
-          port: 25 
-          from: abouchelliga@lesechosleparisien.fr
-          to: abouchelliga@lesechosleparisien.fr
-          subject: Installation Update finished
-          body: 'The installation is Finished.
-                 Server {{ ansible_hostname }} was rebooted '    
+  - name: Send a success email
+    mail:
+      host: mailhost.centorial.local
+      port: 25 
+      from: abouchelliga@lesechosleparisien.fr
+      to: abouchelliga@lesechosleparisien.fr
+      subject: Installation Update finished
+      body: 'The installation is Finished.
+             Server {{ ansible_hostname }} was rebooted '    
